@@ -8,4 +8,34 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ListItemTitleStyle">
+        <item name="android:textColor">@color/list_item_title</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="ListItemSubtitleStyle">
+        <item name="android:textColor">@color/list_item_title</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TitleStyle">
+        <item name="android:textColor">@color/title</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="SubtitleStyle">
+        <item name="android:textColor">@color/subtitle</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="DetailStyle">
+        <item name="android:textColor">@color/detail</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ErrorStyle">
+        <item name="android:textColor">@color/error_msg</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
 </resources>

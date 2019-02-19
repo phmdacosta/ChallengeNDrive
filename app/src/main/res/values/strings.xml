@@ -1,17 +1,13 @@
 <resources>
     <string name="app_name">TMDb Explorer</string>
 
-    <string name="search">Search</string>
-    <string name="search_hint">movie</string>
+    <string name="msg_empty_movies_list">There are no movies</string>
+    <string name="error_load_detail">Could not get the movie details</string>
 
-    <array name="teste">
-        <item>Teste 01</item>
-        <item>Teste 02</item>
-        <item>Teste 03</item>
-        <item>Teste 04</item>
-        <item>Teste 05</item>
-        <item>Teste 06</item>
-        <item>Teste 07</item>
-        <item>Teste 08</item>
-    </array>
+    <string name="search">Search</string>
+    <string name="search_hint">Ex: Movie Name</string>
+
+    <string name="overview">Overview</string>
+    <string name="revenue">Revenue</string>
+    <string name="runtime">Runtime</string>
 </resources>

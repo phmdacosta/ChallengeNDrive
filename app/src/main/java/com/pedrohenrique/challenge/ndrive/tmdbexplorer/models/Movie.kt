@@ -10,6 +10,20 @@ import java.util.Locale
 
 class Movie() : Parcelable {
 
+    companion object {
+        const val KEY = "movie_extra"
+
+        @JvmField val CREATOR = object : Parcelable.Creator<Movie> {
+            override fun createFromParcel(parcel: Parcel): Movie {
+                return Movie(parcel)
+            }
+
+            override fun newArray(size: Int): Array<Movie?> {
+                return arrayOfNulls(size)
+            }
+        }
+    }
+
     var id: Long = 0
     var title: String = ""
     @SerializedName("poster_path")
@@ -27,6 +41,26 @@ class Movie() : Parcelable {
     var genres: List<Genre> = ArrayList()
     var homepage: String = ""
     var status: String = ""
+
+    val smallImgPosterPath: String
+        get() {
+            return "/w200/".plus(imgPosterPath)
+        }
+
+    val bigImgPosterPath: String
+        get() {
+            return "/original/".plus(imgPosterPath)
+        }
+
+    val smallImgBackdropPath: String
+        get() {
+            return "/w200/".plus(imgBackdropPath)
+        }
+
+    val bigImgBackdropPath: String
+        get() {
+            return "/original/".plus(imgBackdropPath)
+        }
 
     val releaseYear: Int
         get() {
@@ -78,15 +112,5 @@ class Movie() : Parcelable {
 
     override fun describeContents(): Int {
         return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Movie> {
-        override fun createFromParcel(parcel: Parcel): Movie {
-            return Movie(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Movie?> {
-            return arrayOfNulls(size)
-        }
     }
 }

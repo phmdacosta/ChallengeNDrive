@@ -1,7 +1,9 @@
 package com.pedrohenrique.challenge.ndrive.tmdbexplorer.adapters
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +14,15 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.pedrohenrique.challenge.ndrive.tmdbexplorer.R
 import com.pedrohenrique.challenge.ndrive.tmdbexplorer.models.Movie
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.movies_list_item.view.*
 import java.util.*
 
-class MoviesListAdapter(listener: MoviesAdapterListener, list: List<Movie>) : BaseAdapter() {
+class MoviesListAdapter(context: Context, listener: MoviesAdapterListener, list: List<Movie>) : BaseAdapter() {
 
     private val listener = listener
     private var list = list
+    private val context = context
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View
@@ -44,11 +48,13 @@ class MoviesListAdapter(listener: MoviesAdapterListener, list: List<Movie>) : Ba
         if (holder.year.text == currentYear.toString()) {
             holder.year.setTextColor(Color.RED)
             holder.year.setTypeface(null, Typeface.BOLD)
+        } else {
+            holder.year.setTextColor(ContextCompat.getColor(context, R.color.list_item_subtitle))
+            holder.year.setTypeface(null, Typeface.NORMAL)
         }
 
-//        Picasso.get().load(Movie.image?.medium)
-//            .placeholder(R.drawable.ic_placeholder)
-//            .into(holder.image)
+        Picasso.get().load(context.getString(R.string.tmdb_api_url_images).plus(movie.smallImgPosterPath))
+            .into(holder.image)
 
         holder.layoutItem.setOnClickListener {
             listener.onSelectListItem(movie)
@@ -64,8 +70,8 @@ class MoviesListAdapter(listener: MoviesAdapterListener, list: List<Movie>) : Ba
     }
 
     override fun getItemId(position: Int): Long {
-//        return list[position].id
-        return position.toLong()
+        return list[position].id
+//        return position.toLong()
     }
 
     override fun getCount(): Int {

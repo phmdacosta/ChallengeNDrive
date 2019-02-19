@@ -5,6 +5,21 @@ import android.os.Parcelable
 import java.util.*
 
 class MoviesList() : Parcelable {
+
+    companion object {
+        const val KEY = "movie_list_extra"
+
+        @JvmField val CREATOR = object : Parcelable.Creator<MoviesList> {
+            override fun createFromParcel(parcel: Parcel): MoviesList {
+                return MoviesList(parcel)
+            }
+
+            override fun newArray(size: Int): Array<MoviesList?> {
+                return arrayOfNulls(size)
+            }
+        }
+    }
+
     var totalResults: Long = 0
     var totalPages: Long = 0
     var page: Int = 0
@@ -34,15 +49,5 @@ class MoviesList() : Parcelable {
 
     override fun describeContents(): Int {
         return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<MoviesList> {
-        override fun createFromParcel(parcel: Parcel): MoviesList {
-            return MoviesList(parcel)
-        }
-
-        override fun newArray(size: Int): Array<MoviesList?> {
-            return arrayOfNulls(size)
-        }
     }
 }
