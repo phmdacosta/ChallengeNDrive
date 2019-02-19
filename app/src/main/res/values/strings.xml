@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">TMDb Explorer</string>
+
+    <string name="search">Search</string>
+    <string name="search_hint">movie</string>
+
+    <array name="teste">
+        <item>Teste 01</item>
+        <item>Teste 02</item>
+        <item>Teste 03</item>
+        <item>Teste 04</item>
+        <item>Teste 05</item>
+        <item>Teste 06</item>
+        <item>Teste 07</item>
+        <item>Teste 08</item>
+    </array>
 </resources>

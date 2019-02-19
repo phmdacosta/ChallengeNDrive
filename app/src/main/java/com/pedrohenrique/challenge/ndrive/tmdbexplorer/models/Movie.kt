@@ -2,20 +2,24 @@ package com.pedrohenrique.challenge.ndrive.tmdbexplorer.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import java.text.NumberFormat
 import java.util.Date
 import java.util.Calendar
 import java.util.Locale
 
-class Movie() :Parcelable {
+class Movie() : Parcelable {
 
     var id: Long = 0
     var title: String = ""
+    @SerializedName("poster_path")
     var imgPosterPath: String = ""
+    @SerializedName("backdrop_path")
     var imgBackdropPath: String = ""
     var releaseDate: Date? = null
     var voteAverage: Double = 0.0
     var voteCount: Int = 0
+    @SerializedName("adult")
     var forAdult: Boolean = false
     var overview: String = ""
     var revenue: Long = 0
@@ -26,9 +30,12 @@ class Movie() :Parcelable {
 
     val releaseYear: Int
         get() {
-            val calendar = Calendar.getInstance()
-            calendar.time = releaseDate
-            return calendar.get(Calendar.YEAR)
+            if (releaseDate != null) {
+                val calendar = Calendar.getInstance()
+                calendar.time = releaseDate
+                return calendar.get(Calendar.YEAR)
+            }
+            return 0
         }
 
     val runtimeFormated: String
@@ -54,7 +61,6 @@ class Movie() :Parcelable {
         voteCount = parcel.readInt()
         forAdult = parcel.readByte() != 0.toByte()
         overview = parcel.readString()
-
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

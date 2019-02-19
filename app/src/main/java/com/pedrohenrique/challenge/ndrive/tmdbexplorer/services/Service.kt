@@ -2,9 +2,12 @@ package com.pedrohenrique.challenge.ndrive.tmdbexplorer.services
 
 import android.content.Context
 import android.util.JsonReader
+import com.google.gson.FieldNamingPolicy
+import com.google.gson.GsonBuilder
 import com.pedrohenrique.challenge.ndrive.tmdbexplorer.R
 import retrofit2.Converter
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class Service(context: Context) {
@@ -14,21 +17,15 @@ class Service(context: Context) {
     var retrofit: Retrofit
 
     init {
+        val gson = GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create()
         retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
 
     fun <T> create(serviceClass: Class<T>): T {
         return retrofit.create(serviceClass)
     }
-
-//    private fun createGsonConverter(): Converter.Factory {
-//        val r = JsonReader()
-//        val gsonBuilder = GsonBuilder()
-//        gsonBuilder.registerTypeAdapter(RedirectionInfo::class.java, RedirectionInfoDeserializer())
-//        val gson = gsonBuilder.create()
-//        return GsonConverterFactory.create(gson)
-//    }
 }
