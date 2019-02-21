@@ -4,14 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import com.pedrohenrique.challenge.ndrive.tmdbexplorer.models.MoviesList
-import com.pedrohenrique.challenge.ndrive.tmdbexplorer.services.Service
-import com.pedrohenrique.challenge.ndrive.tmdbexplorer.services.TMDbService
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableObserver
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.movies_list.*
 import kotlinx.android.synthetic.main.search.*
 
 class MoviesListActivity : AppCompatActivity() {

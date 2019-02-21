@@ -71,11 +71,15 @@ class MoviesListAdapter(context: Context, listener: MoviesAdapterListener, list:
 
     override fun getItemId(position: Int): Long {
         return list[position].id
-//        return position.toLong()
     }
 
     override fun getCount(): Int {
         return list.size
+    }
+
+    fun updateList(list: List<Movie>) {
+        this.list = list
+        this.notifyDataSetChanged()
     }
 
     private class ViewHolder(view: View) {

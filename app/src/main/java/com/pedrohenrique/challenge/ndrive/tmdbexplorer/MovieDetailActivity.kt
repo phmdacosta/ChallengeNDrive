@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.pedrohenrique.challenge.ndrive.tmdbexplorer.models.Movie
-import com.pedrohenrique.challenge.ndrive.tmdbexplorer.services.Service
-import com.pedrohenrique.challenge.ndrive.tmdbexplorer.services.TMDbService
+import com.pedrohenrique.challenge.ndrive.tmdbexplorer.data.remote.Service
+import com.pedrohenrique.challenge.ndrive.tmdbexplorer.data.remote.TMDbService
 import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -29,7 +29,8 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun loadDetails() {
-        val service = Service(this).create(TMDbService::class.java)
+        val service = Service()
+            .create(TMDbService::class.java)
         disposables.add(service.getMovieDetail(movie?.id ?: 0, getString(R.string.tmdb_api_key))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
