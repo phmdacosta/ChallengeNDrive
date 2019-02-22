@@ -1,28 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ProgressBar
-            android:id="@+id/moviesListProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"/>
+    <data>
+        <variable
+            name="moviesListViewModel"
+            type="com.pedrohenrique.challenge.ndrive.tmdbexplorer.viewmodels.MoviesListViewModel"/>
+        <import type="android.view.View" />
+    </data>
 
-    <ListView
-            android:id="@+id/moviesListView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none"
-            android:orientation="vertical"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-            android:id="@+id/msgEmptyList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/ErrorStyle"
-            android:text="@string/msg_empty_movies_list"
-            android:layout_centerInParent="true"
-            android:visibility="gone"/>
+        <ProgressBar
+                android:id="@+id/moviesListProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:visibility="@{moviesListViewModel.loading ? View.VISIBLE : View.GONE}"/>
 
-</RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/moviesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                app:items="@{moviesListViewModel.list}"/>
+
+        <TextView
+                android:id="@+id/msgEmptyList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ErrorStyle"
+                android:text="@string/msg_empty_movies_list"
+                android:layout_centerInParent="true"
+                android:visibility="@{moviesListViewModel.showEmptyListMessage ? View.VISIBLE : View.GONE}"/>
+
+    </RelativeLayout>
+</layout>

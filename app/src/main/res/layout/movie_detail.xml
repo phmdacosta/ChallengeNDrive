@@ -1,93 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="movieViewModel"
+            type="com.pedrohenrique.challenge.ndrive.tmdbexplorer.viewmodels.MovieViewModel"/>
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp">
 
-    <ProgressBar
-            android:id="@+id/movieDetailProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"/>
-
-    <TextView
-            android:id="@+id/errorDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/ErrorStyle"
-            android:text="@string/error_load_detail"
-            android:layout_gravity="center"
-            android:padding="10dp"
-            android:visibility="gone"/>
-
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
-
-        <LinearLayout
-                android:id="@+id/detailContainer"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
+        <ProgressBar
+                android:id="@+id/movieDetailProgressBar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:layout_gravity="center_horizontal"
+                android:visibility="@{movieViewModel.loading ? View.VISIBLE : View.GONE}"/>
 
-            <TextView
-                    android:id="@+id/movieTitle"
-                    android:layout_width="wrap_content"
+        <TextView
+                android:id="@+id/errorDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ErrorStyle"
+                android:text="@string/error_load_detail"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:visibility="@{movieViewModel.showErrorMessage ? View.VISIBLE : View.GONE}"/>
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+
+            <LinearLayout
+                    android:id="@+id/detailContainer"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/TitleStyle"/>
+                    android:visibility="@{movieViewModel.showErrorMessage ? View.GONE : View.VISIBLE}">
 
-            <ImageView
-                    android:id="@+id/movieImgBackdrop"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"/>
+                <TextView
+                        android:id="@+id/movieTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TitleStyle"
+                        android:text="@{movieViewModel.title}"/>
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/SubtitleStyle"
-                    android:text="@string/overview"
-                    android:layout_marginBottom="5dp"/>
+                <ImageView
+                        android:id="@+id/movieImgBackdrop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        app:loadFrom="@{movieViewModel.imgBackdropPath}"/>
 
-            <TextView
-                    android:id="@+id/movieOverview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/DetailStyle"
-                    android:layout_marginBottom="10dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/SubtitleStyle"
+                        android:text="@string/overview"
+                        android:layout_marginBottom="5dp"/>
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/SubtitleStyle"
-                    android:text="@string/revenue"
-                    android:layout_marginBottom="5dp"/>
+                <TextView
+                        android:id="@+id/movieOverview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/DetailStyle"
+                        android:layout_marginBottom="10dp"
+                        android:text="@{movieViewModel.overview}"/>
 
-            <TextView
-                    android:id="@+id/movieRevunue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/DetailStyle"
-                    android:layout_marginBottom="10dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/SubtitleStyle"
+                        android:text="@string/revenue"
+                        android:layout_marginBottom="5dp"/>
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/SubtitleStyle"
-                    android:text="@string/runtime"
-                    android:layout_marginBottom="5dp"/>
+                <TextView
+                        android:id="@+id/movieRevunue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/DetailStyle"
+                        android:layout_marginBottom="10dp"
+                        android:text="@{movieViewModel.revenue}"/>
 
-            <TextView
-                    android:id="@+id/movieRuntime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/DetailStyle"/>
-        </LinearLayout>
-    </ScrollView>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/SubtitleStyle"
+                        android:text="@string/runtime"
+                        android:layout_marginBottom="5dp"/>
 
-</LinearLayout>
+                <TextView
+                        android:id="@+id/movieRuntime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/DetailStyle"
+                        android:text="@{movieViewModel.runtime}"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</layout>

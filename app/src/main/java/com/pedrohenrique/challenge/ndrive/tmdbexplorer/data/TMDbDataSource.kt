@@ -17,21 +17,15 @@ class TMDbDataSource(val service: TMDbService) : DataSource<Movie> {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object: DisposableObserver<MoviesList>() {
                 override fun onComplete() {
-//                    hideProgressBar()
-//                    msgEmptyList.visibility = View.GONE
                 }
 
                 override fun onNext(t: MoviesList) {
                     success(t.toList())
-//                    val adapter = MoviesListAdapter(activity!!, listener, t.toList())
-//                    moviesListView.adapter = adapter
                 }
 
                 override fun onError(e: Throwable) {
                     e.printStackTrace()
                     error()
-//                    hideProgressBar()
-//                    msgEmptyList.visibility = View.VISIBLE
                 }
 
             })
@@ -43,29 +37,15 @@ class TMDbDataSource(val service: TMDbService) : DataSource<Movie> {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object: DisposableObserver<Movie>() {
                 override fun onComplete() {
-//                    movieDetailProgressBar.visibility = View.GONE
-//                    errorDetail.visibility = View.GONE
                 }
 
                 override fun onNext(movie: Movie) {
                     success(movie)
-//                    movieTitle.text = movie.title
-//
-//                    Picasso.get().load(getString(R.string.tmdb_api_url_images).plus(movie.bigImgBackdropPath))
-//                        .into(movieImgBackdrop)
-//
-//                    movieOverview.text = movie.overview
-//                    movieRevunue.text = movie.revenueFormated
-//                    movieRuntime.text = movie.runtimeFormated
-//
-//                    detailContainer.visibility = View.VISIBLE
                 }
 
                 override fun onError(e: Throwable) {
                     e.printStackTrace()
                     error()
-//                    movieDetailProgressBar.visibility = View.GONE
-//                    errorDetail.visibility = View.VISIBLE
                 }
 
             })
@@ -77,21 +57,15 @@ class TMDbDataSource(val service: TMDbService) : DataSource<Movie> {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object: DisposableObserver<MoviesList>() {
                 override fun onComplete() {
-//                    hideProgressBar()
-//                    msgEmptyList.visibility = View.GONE
                 }
 
                 override fun onNext(moviesList: MoviesList) {
                     success(moviesList.toList())
-//                    val adapter = MoviesListAdapter(activity!!, listener, t.toList())
-//                    moviesListView.adapter = adapter
                 }
 
                 override fun onError(e: Throwable) {
                     e.printStackTrace()
                     error()
-//                    hideProgressBar()
-//                    msgEmptyList.visibility = View.VISIBLE
                 }
 
             })
